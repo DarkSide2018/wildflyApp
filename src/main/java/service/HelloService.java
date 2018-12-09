@@ -1,15 +1,25 @@
 package service;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import dao.HelloDao;
+import domain.User;
 
-@Path("/HelloWorld")
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import java.util.List;
+
+@Stateless
 public class HelloService {
+    @EJB
+    private HelloDao helloDao;
 
-    @GET
-    @Path("/sayHello")
-    public String sayHello() {
-        System.out.println("in say hello ");
-        return "<h1>Hello World</h1>";
+    public User getUserByID(int id){
+        return helloDao.getUserByID(id);
+    }
+    public void saveUser(User user){
+        helloDao.saveUser(user);
+    }
+
+    public List<User> getAllUsers(){
+       return  helloDao.getAll();
     }
 }
